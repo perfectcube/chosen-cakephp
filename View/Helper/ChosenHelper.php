@@ -120,9 +120,9 @@ class ChosenHelper extends AppHelper
         else if (strstr($attributes['class'], $class) === false) {
             $attributes['class'] .= " {$class}";
         }
-		Dev::dump($attributes);
+		Dev::nugget($attributes);
 		$rendered = $this->Form->select($name, $options, $attributes);
-		Dev::dump($rendered);
+		Dev::nugget($rendered);
         return $rendered;
 
     }
