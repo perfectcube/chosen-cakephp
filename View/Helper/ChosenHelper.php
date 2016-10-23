@@ -120,8 +120,11 @@ class ChosenHelper extends AppHelper
         else if (strstr($attributes['class'], $class) === false) {
             $attributes['class'] .= " {$class}";
         }
+		Dev::dump($attributes);
+		$rendered = $this->Form->select($name, $options, $attributes);
+		Dev::dump($rendered);
+        return $rendered;
 
-        return $this->Form->select($name, $options, $attributes);
     }
 
     public function afterRender($viewFile)
