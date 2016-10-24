@@ -120,8 +120,42 @@ class ChosenHelper extends AppHelper
         else if (strstr($attributes['class'], $class) === false) {
             $attributes['class'] .= " {$class}";
         }
+
+		$hide_label = (
+			isset($attributes['label'])
+			&& $attributes['label'] !== false
+		) ? true : false;
+		
+		if(!$hide_label){
+			// Default to the passed in select name
+			$label = Inflector::humanize($name);
+			// We have a configured label if:
+			$override_label = (
+				isset($attributes['label'])
+				&& !empty($attributes['label'])
+			) ? true : false;
+			// since we have a label 
+			if($override_label){
+				// use the label
+				$label = $attributes['label'];
+			}	
+		}
+
 		Dev::speek($attributes);
-		$rendered = $this->Form->select($name, $options, $attributes);
+		
+		$arguments = array(
+			'type'=>'select', 
+			'options'=>$options
+		);
+
+		// dont alow options or type to be passed in through $attributes
+		unset($attributes['type'],$attributes['options']);
+		// merge in the required type and options keys 
+		$arguments = array_merge($attributes,$arguments);
+		Dev::speek($arguments);	
+		// $rendered = $this->Form->select($name, $options, $attributes);
+		$rendered = $this->Form->input($name, $arguments);
+		
 		Dev::speek($rendered);
         return $rendered;
 
