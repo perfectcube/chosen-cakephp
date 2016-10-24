@@ -94,6 +94,10 @@ class ChosenHelper extends AppHelper
 
     /**
      * Chosen select element.
+	 * $attributes[label] = true will show a default label
+	 * $attributes[label] = "something" will show a label "someting"
+	 * $attributes[label] = false will hide the label
+	 * dont set $attributes[label] to hide the label
      */
     public function select($name, $options = array(), $attributes = array())
     {
@@ -122,8 +126,11 @@ class ChosenHelper extends AppHelper
         }
 
 		$hide_label = (
+			// asking to hide label by setting it to false
 			isset($attributes['label'])
 			&& $attributes['label'] !== false
+			// retain original behavior
+			|| !isset($attributes['label'])
 		) ? true : false;
 		
 		if(!$hide_label){
@@ -131,8 +138,11 @@ class ChosenHelper extends AppHelper
 			$label = Inflector::humanize($name);
 			// We have a configured label if:
 			$override_label = (
+				// you're asked for a label
 				isset($attributes['label'])
 				&& !empty($attributes['label'])
+				// boolean true will show default label
+				&& is_string($attributes['label'])
 			) ? true : false;
 			// since we have a label 
 			if($override_label){
@@ -152,11 +162,10 @@ class ChosenHelper extends AppHelper
 		unset($attributes['type'],$attributes['options']);
 		// merge in the required type and options keys 
 		$arguments = array_merge($attributes,$arguments);
-		Dev::speek($arguments);	
+
 		// $rendered = $this->Form->select($name, $options, $attributes);
 		$rendered = $this->Form->input($name, $arguments);
-		
-		Dev::speek($rendered);
+
         return $rendered;
 
     }
