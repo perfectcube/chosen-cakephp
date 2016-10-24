@@ -93,11 +93,12 @@ class ChosenHelper extends AppHelper
     }
 
     /**
-     * Chosen select element.
-	 * $attributes[label] = true will show a default label
-	 * $attributes[label] = "something" will show a label "someting"
-	 * $attributes[label] = false will hide the label
-	 * dont set $attributes[label] to hide the label
+     * Chosen select element with an optional label
+	 * Showing a label:
+	 * 		$attributes[label] = true will show a default label
+	 * 		$attributes[label] = "something" will show a label "someting"
+	 * Hiding the label
+	 * 		$attributes[label] = false will hide the label or dont set $attributes[label] to hide the label
      */
     public function select($name, $options = array(), $attributes = array())
     {
@@ -150,8 +151,6 @@ class ChosenHelper extends AppHelper
 				$label = $attributes['label'];
 			}	
 		}
-
-		Dev::speek($attributes);
 		
 		$arguments = array(
 			'type'=>'select', 
