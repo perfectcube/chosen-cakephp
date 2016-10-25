@@ -99,6 +99,12 @@ class ChosenHelper extends AppHelper
 	 * 		$attributes[label] = "something" will show a label "someting"
 	 * Hiding the label
 	 * 		$attributes[label] = false will hide the label or dont set $attributes[label] to hide the label
+	 * Force required:
+	 * 		$attributes[required] = true
+	 * Show a default selected value:
+	 * 		$attributes[empty] = array(0 => '') // value=0 label=''
+	 * 		$attributes[empty] = '' // value='' label='' ... show placeholder as label 
+	 * 		$attributes[empty] = 'Something' // value= 
      */
     public function select($name, $options = array(), $attributes = array())
     {
@@ -155,8 +161,7 @@ class ChosenHelper extends AppHelper
 		$arguments = array(
 			'type'=>'select', 
 			'options'=>$options,
-			'empty'=>'', 
-			'required' => true
+			'empty'=>''
 		);
 
 		// dont alow options or type to be passed in through $attributes
