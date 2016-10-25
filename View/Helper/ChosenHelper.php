@@ -154,7 +154,9 @@ class ChosenHelper extends AppHelper
 		
 		$arguments = array(
 			'type'=>'select', 
-			'options'=>$options
+			'options'=>$options,
+			'empty'=>'Select', 
+			'required' => true
 		);
 
 		// dont alow options or type to be passed in through $attributes
